@@ -1,0 +1,249 @@
+/* Global Styles */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #A4C3FC;
+}
+body {
+    font-family: "Voltaire", sans-serif;
+}
+p {
+    font-weight: 700;
+    font-size: 18px;
+}
+.text-vertical-center {
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+}
+.text-vertical-center h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 4em;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+}
+.text-vertical-top {
+    display: table-cell;
+    text-align: center;
+    vertical-align: top;
+}
+.text-vertical-top h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 4em;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+}
+h2 {
+    font-family: 'Voltaire', sans-serif;
+}
+/* Custom Button Styles */
+.btn-dark {
+    border-radius: 0;
+    color: #fff;
+    background-color: rgba(0,0,0,0.4);
+}
+.btn-dark:hover,
+.btn-dark:focus,
+.btn-dark:active {
+    color: #fff;
+    background-color: rgba(0,0,0,0.7);
+}
+.btn-dark_2 {
+    border-radius: 0;
+    color: #fff;
+    background-color: #637598;
+}
+.btn-dark_2:hover,
+.btn-dark_2:focus,
+.btn-dark_2:active {
+    color: #fff;
+    background-color: rgba(0,0,0,0.7);
+}
+.btn-light {
+    border-radius: 0;
+    color: #333;
+    background-color: rgb(255,255,255);
+}
+.btn-light:hover,
+.btn-light:focus,
+.btn-light:active {
+    color: #333;
+    background-color: rgba(255,255,255,0.8);
+}
+/* Custom Horizontal Rule */
+hr.small {
+    max-width: 100px;
+}
+.toggle {
+    margin: 5px 5px 0 0;
+}
+/* Header */
+.header_2 {
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 43%;
+    background: url(../img/bg_2.jpg) no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+.splashbuttons {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: 'Voltaire', sans-serif;
+}
+/* Modal */
+.modal-body{
+    background-color: #A4C3FC;
+    font-family: 'Voltaire', sans-serif;
+}
+/*Forms*/
+.form-control-label {
+    font-weight: 700;
+    font-size: 18px;
+}
+/*GMAPS*/
+#map_canvas{
+    flex: 1;
+    height: 300px;
+}
+/*Flex(sh) Boxes*/
+#box{
+    display: flex;
+}
+/*#mo_boxes{
+    flex: 1;
+}*/
+#leaderboard{
+    flex: 1;
+    height: 300px;
+/* Global Styles */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #A4C3FC;
+}
+body {
+    font-family: "Voltaire", sans-serif;
+}
+p {
+    font-weight: 700;
+    font-size: 18px;
+}
+.text-vertical-center {
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+}
+.text-vertical-center h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 4em;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+}
+.text-vertical-top {
+    display: table-cell;
+    text-align: center;
+    vertical-align: top;
+}
+.text-vertical-top h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 4em;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+}
+h2 {
+    font-family: 'Voltaire', sans-serif;
+}
+/* Custom Button Styles */
+.btn-dark {
+    border-radius: 0;
+    color: #fff;
+    background-color: rgba(0,0,0,0.4);
+}
+.btn-dark:hover,
+.btn-dark:focus,
+.btn-dark:active {
+    color: #fff;
+    background-color: rgba(0,0,0,0.7);
+}
+.btn-dark_2 {
+    border-radius: 0;
+    color: #fff;
+    background-color: #637598;
+}
+.btn-dark_2:hover,
+.btn-dark_2:focus,
+.btn-dark_2:active {
+    color: #fff;
+    background-color: rgba(0,0,0,0.7);
+}
+.btn-light {
+    border-radius: 0;
+    color: #333;
+    background-color: rgb(255,255,255);
+}
+.btn-light:hover,
+.btn-light:focus,
+.btn-light:active {
+    color: #333;
+    background-color: rgba(255,255,255,0.8);
+}
+/* Custom Horizontal Rule */
+hr.small {
+    max-width: 100px;
+}
+.toggle {
+    margin: 5px 5px 0 0;
+}
+/* Header */
+.header_2 {
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 43%;
+    background: url(../img/bg_2.jpg) no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+.splashbuttons {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: 'Voltaire', sans-serif;
+}
+/* Modal */
+.modal-body{
+    background-color: #A4C3FC;
+    font-family: 'Voltaire', sans-serif;
+}
+/*Forms*/
+.form-control-label {
+    font-weight: 700;
+    font-size: 18px;
+}
+/*GMAPS*/
+#map_canvas{
+    flex: 1;
+    height: 300px;
+}
+/*Flex(sh) Boxes*/
+#box{
+    display: flex;
+}
+/*#mo_boxes{
+    flex: 1;
+}*/
+#leaderboard{
+    flex: 1;
+    height: 300px;
+}

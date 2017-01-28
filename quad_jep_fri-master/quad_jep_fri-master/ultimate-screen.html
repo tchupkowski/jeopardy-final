@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ULTIMATE SCREEN</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/ultimate.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Orbitron|Voltaire" rel="stylesheet">
+
+</head>
+
+<body onload="initialize()">
+
+    <header class="header_2" id="top">
+        <div class="text-vertical-top">
+            <h1>Game End!</h1>
+            <br>
+            <h2>Your Score:<span id="userScore"></span></h2>
+            <br>
+            <button type="button" class="btn btn-dark btn-lg splashbuttons" data-toggle="modal" data-target="#exampleModal" data-whatever="logScore">Log Info</button>
+        </div>
+    </header>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="user-name" class="form-control-label">Your Name:</label>
+            <input type="text" class="form-control" id="user-name">
+          </div>
+          <div class="form-group">
+            <label for="user-zip" class="form-control-label">Zip Code:</label>
+            <input type="text" class="form-control" id="user-zip"/>
+            <div id="zipError" class="error text-danger"></div>
+          </div>
+          <br>
+          <br>
+        <button id="logScore" type="button" class="btn btn-dark_2 btn-lg splashbuttons" data-dismiss="modal">Enter</button>
+        <button type="button" class="btn btn-dark_2 btn-lg splashbuttons" data-dismiss="modal">Close</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+<script type="text/javascript">
+
+// creat variable recepticle bin to dump userScore from localStorage
+var userScore=localStorage.getItem("userScore");
+
+console.log("Score:",userScore);
+
+$("#userScore").html(userScore);
+
+var map;
+
+var config = {
+    apiKey: "AIzaSyBfQNxZAy6tnIC_Yrp-bE0y6K55BQNVH2o",
+    authDomain: "quadjepdb.firebaseapp.com",
+    databaseURL: "https://quadjepdb.firebaseio.com",
+    storageBucket: "quadjepdb.appspot.com",
+    messagingSenderId: "718061353889"
+};
+
+firebase.initializeApp(config);
+
+var dataRef = firebase.database().ref().child("quadjepdb")
+    var userName = "";
+    var userZip = "";
+    var userScore
+    var zipArray = [];
+
+$("#logScore").on("click", function() {
+    console.log("I know where you live ( ͡° ͜ʖ ͡°)")
+
+    // hides the error if it was tripped - valid zip must be passed in order to do trigger this
+$("#zipError").hide();
+    userName = $("#user-name").val().trim();
+    userZip = $("#user-zip").val().trim();
+    userScore = localStorage.getItem('userScore');
+
+    // user validation errors show if no in
+    if(!userZip){
+        $("#zipError").html("Surely you must be from somewhere...");
+        $("#zipError").show()
+        return false;
+    }else if(!/(^\d{5}$)|(^\d{5}-\d{4}$)/.test(userZip) ){
+        $("#zipError").html("DOES NOT COMPUTE!!!");
+        $("#zipError").show();
+        return false;
+    }
+    dataRef.push({
+        userScore,
+        userName,
+        userZip,
+        });
+
+// Create a marker for the newly created user
+    createMarker(userZip);
+
+});
+
+
+dataRef.orderByChild("userScore").limitToLast(5).on("value", snap => {
+
+    // constants created to hold the users and list
+    const users = snap.val();
+    const list = $('<ul></ul>');
+    
+    $("#leaderboard").html('');
+    $('#leaderboard').append(list);
+
+    //create a constant array to dump the scores into
+    const array =[];
+    
+    // forEach entry of user get the key and user information, create function(array.push(user))
+    // filter the array for the array and create function then pass it a double-not to check for inconsistency (since firebase could potentially spit back a variety of unprocessably stuffs)
+    // sort it by comparing user1 to user 2 the using `<n>${}... to concatinate strings 
+    Object.entries(users).forEach(([key,user])=>array.push(user));
+    array.filter(user=>!!user.userScore).sort((u1,u2)=>u2.userScore-u1.userScore).forEach(user=>list.append(`<li>${user.userName} - ${user.userScore}</li>`));
+
+    console.log(snap.val());
+});
+
+    // The 'value' snapshot will give an initial snapshot of the data
+dataRef.on("value", snap => {
+
+    var userArray = snap.val();
+
+// Create a marker forEach existing user
+    snap.forEach(function(child) {
+        var value = child.val();
+        var userZip = value.userZip;
+        createMarker(userZip);
+    });
+});
+
+var createMarker = function(zipCode) {
+    var geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode( { 'address': zipCode}, function(results, status) {
+        console.log(results);
+        // console.log(status);
+                if (status == google.maps.GeocoderStatus.OK) {
+                    var marker = new google.maps.Marker({
+                    map: map,
+                    // position marker based on [n] zipcode
+                    position: results[0].geometry.location
+
+                    });
+                }
+            });
+}
+
+</script>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true">
+    </script>
+    <script type="text/javascript">
+    function initialize() {
+        
+        
+        var mapOptions = {
+            center: new google.maps.LatLng(35.9462, -78.9422),
+            zoom: 2,
+            mapTypeId: google.maps.MapTypeId.hybrid
+        };
+        map = new google.maps.Map(document.getElementById("map_canvas"),
+        mapOptions);
+
+        // create marker from the array which is pulling zips from the DB
+        for (var i=0,len=zipArray.length; i<len; i++){
+            createMarker(zipArray[i]);
+        }
+        
+    }
+</script>
+    
+    <div id="box">
+    <!-- me sucking at using flexboxes to hack the googlemap to move itself over, obviously it didn't work well -->
+    <!-- <span id="mo_boxes"></span>   -->
+    <span id="map_canvas"></span>
+    <span class="beepbeep" id="leaderboard"></span>
+    </div>
+</body>
+</html> 
